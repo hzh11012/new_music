@@ -56,7 +56,6 @@ export default {
       }
       window.localStorage.setItem("token", info.token);
       this.$store.commit('userInfo', info);
-      console.log(info);
       Toast.loading({
         forbidClick: true,
         duration: 1500,

@@ -6,20 +6,28 @@ import store from './store'
 import './assets/css/global.css'
 Vue.config.productionTip = false
 
-import { Button, NavBar, Icon, Field, CellGroup, Toast, Form, CountDown,
-  PasswordInput,NumberKeyboard  } from 'vant'
+import { Button, NavBar, Icon, Field, Toast, Form, CountDown,
+  PasswordInput, NumberKeyboard, Tab, Tabs, Popup, Sticky, Image, Card,
+  Tag, Swipe, SwipeItem, Grid, GridItem  } from 'vant'
 Vue.use(Button);
 Vue.use(NavBar);
 Vue.use(Icon);
 Vue.use(Field);
-Vue.use(CellGroup);
-Vue.use(Toast);
 Vue.use(Form);
 Vue.use(CountDown);
 Vue.use(PasswordInput);
 Vue.use(NumberKeyboard);
-
-
+Vue.use(Tab);
+Vue.use(Tabs);
+Vue.use(Popup);
+Vue.use(Sticky);
+Vue.use(Image);
+Vue.use(Card);
+Vue.use(Tag);
+Vue.use(Swipe);
+Vue.use(SwipeItem);
+Vue.use(Grid);
+Vue.use(GridItem);
 //配置请求的根路径
 import axios from 'axios'
 axios.defaults.baseURL = '/api'
