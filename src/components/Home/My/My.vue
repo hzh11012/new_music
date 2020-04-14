@@ -1,8 +1,11 @@
 <template>
   <div>
-    <van-sticky>
+    <van-sticky z-index="1">
       <headers></headers>
     </van-sticky>
+    <lists></lists>
+    <records></records>
+    <usermusiclist></usermusiclist>
     <lists></lists>
     <records></records>
     <usermusiclist></usermusiclist>
@@ -41,10 +44,14 @@ export default {
       //用户的 我喜欢的音乐 歌单内容
       this.$store.commit("userLoveplaylist", info1.playlist.tracks);
 
-      const data = await this.$http.get(
-        "/user/record?uid=" + this.$store.state.userinfo.account.id
-      );
-      console.log(data);
+      // const data = await this.$http.get(
+      //   "/user/record?uid=" + this.$store.state.userinfo.account.id
+      // );
+      // console.log(data);
+
+      //轮播图
+      const { data: info2 } = await this.$http.get("/banner?type=1");
+      this.$store.commit("banners", info2.banners);
     }
   },
   created() {

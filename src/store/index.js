@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Axios from 'axios';
 
 Vue.use(Vuex)
 
@@ -10,7 +11,10 @@ export default new Vuex.Store({
     userinfo: '',
     userdetail: '',
     userplaylist: '',
-    userloveplaylist: ''
+    userloveplaylist: '',
+    banners: '',
+    recommend: '',
+    newsongs: ''
   },
   mutations: {
     //用户的信息
@@ -22,12 +26,23 @@ export default new Vuex.Store({
       state.userdetail = info;
     },
     //用户的全部歌单
-    userPlaylist(state, info){
+    userPlaylist(state, info) {
       state.userplaylist = info;
     },
     //用户的 我喜欢的音乐 歌单
-    userLoveplaylist(state, info){
+    userLoveplaylist(state, info) {
       state.userloveplaylist = info;
+    },
+    //轮播图
+    banners(state, info) {
+      state.banners = info;
+    },
+    //推荐歌单
+    recommend(state, info) {
+      state.recommend = info;
+    },
+    newSongs(state, info){
+      state.newsongs = info;
     }
   },
   actions: {

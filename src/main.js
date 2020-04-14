@@ -6,9 +6,11 @@ import store from './store'
 import './assets/css/global.css'
 Vue.config.productionTip = false
 
-import { Button, NavBar, Icon, Field, Toast, Form, CountDown,
+import {
+  Button, NavBar, Icon, Field, Toast, Form, CountDown,
   PasswordInput, NumberKeyboard, Tab, Tabs, Popup, Sticky, Image, Card,
-  Tag, Swipe, SwipeItem, Grid, GridItem  } from 'vant'
+  Tag, Swipe, SwipeItem, Grid, GridItem, Skeleton, PullRefresh
+} from 'vant'
 Vue.use(Button);
 Vue.use(NavBar);
 Vue.use(Icon);
@@ -28,6 +30,9 @@ Vue.use(Swipe);
 Vue.use(SwipeItem);
 Vue.use(Grid);
 Vue.use(GridItem);
+Vue.use(Skeleton);
+Vue.use(PullRefresh);
+
 //配置请求的根路径
 import axios from 'axios'
 axios.defaults.baseURL = '/api'

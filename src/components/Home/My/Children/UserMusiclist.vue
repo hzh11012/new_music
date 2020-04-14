@@ -94,7 +94,6 @@ export default {
 .img {
   height: 58px;
   width: 58px;
-  background: blueviolet;
   border-radius: 8px;
   background-size: cover;
   background-position: center;
