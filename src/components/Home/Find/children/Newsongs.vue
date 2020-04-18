@@ -43,8 +43,6 @@ export default {};
   margin-right: -2px;
   -webkit-align-items: center;
   align-items: center;
-  -webkit-justify-content: center;
-  justify-content: center;
 }
 .img {
   height: 58px;
@@ -69,7 +67,7 @@ export default {};
   padding-right: 4px;
 }
 .listname:first-child {
-  font-size: 16px;
+  font-size: 14px;
 }
 .listname .artist {
   font-size: 12px;

@@ -37,18 +37,10 @@ export default {
       const { data: data1 } = await this.$http.get("/personalized/newsong");
       this.$store.commit("newSongs", data1.result);
       setTimeout(() => {
-        this.suijinum = Math.floor(Math.random() * (9 - 1) + 1);
-        this.suijinum1 = Math.floor(Math.random() * (19 - 10) + 10);
+        this.suijinum = Math.floor(Math.random() * (this.$store.state.recommend.length/2 - 1) + 1);
+        this.suijinum1 = Math.floor(Math.random() * (this.$store.state.recommend.length - this.$store.state.recommend.length/2) + this.$store.state.recommend.length/2);
         this.isLoading = false;
       }, 1000);
-    }
-  },
-  computed: {
-    suijiCount2() {
-      return Math.floor(Math.random() * (9 - 1) + 1);
-    },
-    suijiCount1() {
-      return Math.floor(Math.random() * (19 - 10) + 10);
     }
   },
   created() {

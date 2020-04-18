@@ -14,7 +14,8 @@ export default new Vuex.Store({
     userloveplaylist: '',
     banners: '',
     recommend: '',
-    newsongs: ''
+    newsongs: '',
+    searchname: ''
   },
   mutations: {
     //用户的信息
@@ -43,6 +44,9 @@ export default new Vuex.Store({
     },
     newSongs(state, info){
       state.newsongs = info;
+    },
+    searchName(state, info) {
+      state.searchname = info;
     }
   },
   actions: {

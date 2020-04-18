@@ -64,7 +64,7 @@ export default {
     },
     goHome() {
       setTimeout(() => {
-        this.$router.push("/home");
+        this.$router.push("/home/my");
       }, 1500);
     }
   }

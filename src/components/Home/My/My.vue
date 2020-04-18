@@ -6,9 +6,6 @@
     <lists></lists>
     <records></records>
     <usermusiclist></usermusiclist>
-    <lists></lists>
-    <records></records>
-    <usermusiclist></usermusiclist>
   </div>
 </template>
 

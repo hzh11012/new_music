@@ -9,7 +9,8 @@ Vue.config.productionTip = false
 import {
   Button, NavBar, Icon, Field, Toast, Form, CountDown,
   PasswordInput, NumberKeyboard, Tab, Tabs, Popup, Sticky, Image, Card,
-  Tag, Swipe, SwipeItem, Grid, GridItem, Skeleton, PullRefresh
+  Tag, Swipe, SwipeItem, Grid, GridItem, Skeleton, PullRefresh, Search, 
+  Cell, CellGroup, Loading, List 
 } from 'vant'
 Vue.use(Button);
 Vue.use(NavBar);
@@ -32,6 +33,12 @@ Vue.use(Grid);
 Vue.use(GridItem);
 Vue.use(Skeleton);
 Vue.use(PullRefresh);
+Vue.use(Search);
+Vue.use(Cell);
+Vue.use(CellGroup);
+Vue.use(Loading);
+Vue.use(List);
+
 
 //配置请求的根路径
 import axios from 'axios'

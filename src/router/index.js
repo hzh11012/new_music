@@ -6,9 +6,12 @@ import Login from '../components/Login/Login'
 import Register from '../components/Login/Register'
 import Login1 from '../components/Login/Login1'
 import Home from '../components/Home/Home'
-// import My from '../components/Home/My/My'
-// import Find from '../components/Home/Find/Find'
-// import Cloud from '../components/Home/Cloud/Cloud'
+import My from '../components/Home/My/My'
+import Find from '../components/Home/Find/Find'
+import Cloud from '../components/Home/Cloud/Cloud'
+import Search from '../components/Home/Search/Search'
+import SearchFinshed from '../components/Home/Search/SearchFinshed'
+import Test from "../components/Home/Test"
 Vue.use(VueRouter)
 
 const routes = [
@@ -18,13 +21,16 @@ const routes = [
   { path: '/register', name: 'register', component: Register },
   { path: '/login1', name: 'login1', component: Login1 },
   {
-    path: '/home', name: 'home', component: Home,
-    // children: [
-    //   { path: '/home/my', component: My },
-    //   { path: '/home/find', component: Find },
-    //   { path: '/home/cloud', component: Cloud },
-    // ]
+    path: '/home', redirect: '/home/my', name: 'home', component: Home,
+    children: [
+      { path: '/home/my', component: My },
+      { path: '/home/find', component: Find },
+      { path: '/home/cloud', component: Cloud },
+    ]
   },
+  { path: '/search', name: 'search', component: Search },
+  { path: '/searchfinshed', name: 'searchfinshed', component: SearchFinshed },
+  { path: '/test', name: 'test', component: Test }
 ]
 
 const router = new VueRouter({
