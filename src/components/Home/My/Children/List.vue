@@ -2,7 +2,7 @@
   <div>
     <div class="title">我的音乐</div>
     <div class="list">
-      <div
+      <div @click="goMusiclist()"
         class="childDiv"
         :style="{'background-image':'url(' + (this.$store.state.userloveplaylist[0].al.picUrl) + ')'}"
       >
@@ -22,7 +22,25 @@
 </template>
 
 <script>
-export default {};
+import { getImageMeanColor } from "../../../../assets/js/getImageMeanColor.js";
+export default {
+  methods:{
+    goMusiclist(){
+      const url = this.$store.state.userloveplaylist[0].al.picUrl;
+      getImageMeanColor({
+        imageUrl: url,
+        clipHeight: "100%",
+        skewPosition: "top",
+        minification: 10,
+        cb: function(rgba) {
+          this.$store.commit("backColor", rgba);
+        }.bind(this)
+      });
+      this.$store.commit("musicListId", this.$store.state.userplaylist[0].id);
+      this.$router.push("/musiclist");
+    }
+  }
+};
 </script>
 
 <style scoped>

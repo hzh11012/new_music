@@ -1,7 +1,7 @@
 <template>
   <div>
     <van-list v-model="loading3" :finished="finished3" finished-text="没有更多了" @load="onLoad3">
-      <div class="lists3" v-for="(item, index) in playlists" :key="index">
+      <div class="lists3" @click="goMusiclist(item.id,item.coverImgUrl)" v-for="(item, index) in playlists" :key="index">
         <div>
           <van-image width="60px" :src="item.coverImgUrl" height="60px" fit="cover" radius="5" />
         </div>
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { getImageMeanColor } from "../../../../assets/js/getImageMeanColor.js";
 export default {
   data() {
     return {
@@ -58,6 +59,19 @@ export default {
             this.page3 += 15;
           });
       }, 1000);
+    },
+    goMusiclist(id,url){
+      getImageMeanColor({
+        imageUrl: url,
+        clipHeight: "100%",
+        skewPosition: "top",
+        minification: 10,
+        cb: function(rgba) {
+          this.$store.commit("backColor", rgba);
+        }.bind(this)
+      });
+      this.$store.commit("musicListId", id);
+      this.$router.push("/musiclist");
     }
   }
 };

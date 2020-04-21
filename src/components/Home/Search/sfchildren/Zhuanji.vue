@@ -1,9 +1,14 @@
 <template>
   <div>
     <van-list v-model="loading2" :finished="finished2" finished-text="没有更多了" @load="onLoad2">
-      <div class="lists2" v-for="(item, index) in albums" :key="index">
+      <div
+        class="lists2"
+        @click="goMusiclist(item.id,item.picUrl)"
+        v-for="(item, index) in albums"
+        :key="index"
+      >
         <div class="index2">
-          <van-image width="60px" height="60px" :src="item.picUrl" fit="cover" radius='5'/>
+          <van-image width="60px" height="60px" :src="item.picUrl" fit="cover" radius="5" />
         </div>
         <div class="content2 van-ellipsis">
           <div class="name2 van-ellipsis">
@@ -12,7 +17,7 @@
           </div>
           <div class="desc2 van-ellipsis">
             <span>{{item.artist.name}}</span>
-            <span> {{item.publishTime | formatDate}}</span>
+            <span>{{item.publishTime | formatDate}}</span>
           </div>
         </div>
       </div>
@@ -21,7 +26,9 @@
 </template>
 
 <script>
-import {formatDate} from '../../../../assets/js/date'
+// import analyze from "rgbaster";
+import { getImageMeanColor } from "../../../../assets/js/getImageMeanColor.js";
+import { formatDate } from "../../../../assets/js/date";
 export default {
   data() {
     return {
@@ -44,6 +51,7 @@ export default {
               this.page2
           )
           .then(res => {
+            console.log(res);
             this.albumCount = res.data.result.albumCount;
             if (res.data.result.albums !== undefined) {
               res.data.result.albums.forEach(element => {
@@ -59,13 +67,28 @@ export default {
             this.page2 += 15;
           });
       }, 1000);
-    }
+    },
+    goMusiclist(id, url) {
+      getImageMeanColor({
+        imageUrl: url,
+        clipHeight: "100%",
+        skewPosition: "top",
+        minification: 10,
+        cb: function(rgba) {
+          this.$store.commit("backColor", rgba);
+        }.bind(this)
+      });
+      this.$store.commit("musicListId", id);
+      this.$router.push("/zhuanji");
+    },
+    
   },
   filters: {
     formatDate(time) {
       var date = new Date(time);
-      return formatDate(date, 'yyyy-MM-dd')
-    }
+      return formatDate(date, "yyyy-MM-dd");
+    },
+    
   }
 };
 </script>
@@ -95,7 +118,7 @@ export default {
 }
 .content2 {
   flex: 1;
-  
+
   width: 100%;
   margin-left: 12px;
 }
@@ -108,7 +131,7 @@ export default {
   font-weight: 500;
   font-size: 12px;
 }
-.alias{
+.alias {
   color: rgb(173, 173, 173);
 }
 </style>

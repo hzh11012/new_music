@@ -16,7 +16,11 @@
       <div class="content">
         <div v-show="active == 0">
           <van-grid :column-num="2" :border="false" :center="false">
-            <van-grid-item v-for="(item,index) in playlist.slice(1,playlistnum)" :key="index">
+            <van-grid-item
+              @click="goMusiclist(item.id,item.coverImgUrl)"
+              v-for="(item,index) in playlist.slice(1,playlistnum)"
+              :key="index"
+            >
               <div class="items">
                 <div class="img" :style="{'background-image':'url(' + (item.coverImgUrl) + ')'}"></div>
                 <div class="listinfo">
@@ -29,7 +33,7 @@
         </div>
         <div v-show="active == 1">
           <van-grid :column-num="1" :border="false" :center="false">
-            <van-grid-item v-for="(item,index) in playlist.slice(playlistnum)" :key="index">
+            <van-grid-item @click="goMusiclist(item.id,item.coverImgUrl)" v-for="(item,index) in playlist.slice(playlistnum)" :key="index">
               <div class="items">
                 <div class="img" :style="{'background-image':'url(' + (item.coverImgUrl) + ')'}"></div>
                 <div class="listinfo">
@@ -46,6 +50,7 @@
 </template>
 
 <script>
+import { getImageMeanColor } from "../../../../assets/js/getImageMeanColor.js";
 export default {
   data() {
     return {
@@ -62,6 +67,21 @@ export default {
           return x.subscribed;
         })
         .indexOf(true);
+    }
+  },
+  methods: {
+    goMusiclist(id,url) {
+      getImageMeanColor({
+        imageUrl: url,
+        clipHeight: "100%",
+        skewPosition: "top",
+        minification: 10,
+        cb: function(rgba) {
+          this.$store.commit("backColor", rgba);
+        }.bind(this)
+      });
+      this.$store.commit("musicListId", id);
+      this.$router.push("/musiclist");
     }
   }
 };
@@ -103,9 +123,6 @@ export default {
   width: 100%;
   padding-left: 6px;
 }
-/* .listname {
-  padding-bottom: 8px;
-} */
 .listname,
 .musiccount {
   font-size: 12px;

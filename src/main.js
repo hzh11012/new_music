@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 //导入全局样式表
 import './assets/css/global.css'
+import './assets/js/getImageMeanColor.js'
 Vue.config.productionTip = false
 
 import {

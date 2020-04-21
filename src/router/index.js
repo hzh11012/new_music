@@ -12,6 +12,8 @@ import Cloud from '../components/Home/Cloud/Cloud'
 import Search from '../components/Home/Search/Search'
 import SearchFinshed from '../components/Home/Search/SearchFinshed'
 import Test from "../components/Home/Test"
+import MusicList from "../components/Home/MusicList/MusicList"
+import ZhuanJi from "../components/Home/Zhuanji/ZhuanJi"
 Vue.use(VueRouter)
 
 const routes = [
@@ -30,7 +32,9 @@ const routes = [
   },
   { path: '/search', name: 'search', component: Search },
   { path: '/searchfinshed', name: 'searchfinshed', component: SearchFinshed },
-  { path: '/test', name: 'test', component: Test }
+  { path: '/test', name: 'test', component: Test },
+  { path: '/musiclist', name: 'musiclist', component: MusicList },
+  { path: '/zhuanji', name: 'zhuanji', component: ZhuanJi }
 ]
 
 const router = new VueRouter({

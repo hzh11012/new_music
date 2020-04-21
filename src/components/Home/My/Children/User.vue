@@ -1,8 +1,7 @@
 <template>
-  <div
-    class="bgimg"
+  <div class="bgimg"
     :style="{'background-image':'url(' + (this.$store.state.userinfo.profile.backgroundUrl) + ')'}"
-  >
+>
     <div class="bgimg-mask">
       <van-card>
         <div slot="thumb" class="touxiangbox">

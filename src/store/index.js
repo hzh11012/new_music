@@ -15,7 +15,9 @@ export default new Vuex.Store({
     banners: '',
     recommend: '',
     newsongs: '',
-    searchname: ''
+    searchname: '',
+    musiclistid: '',
+    backcolor:''
   },
   mutations: {
     //用户的信息
@@ -42,11 +44,20 @@ export default new Vuex.Store({
     recommend(state, info) {
       state.recommend = info;
     },
+    //新歌推荐
     newSongs(state, info){
       state.newsongs = info;
     },
+    //搜索关键词
     searchName(state, info) {
       state.searchname = info;
+    },
+    //歌单ID
+    musicListId(state, info){
+      state.musiclistid = info;
+    },
+    backColor(state, info){
+      state.backcolor = info;
     }
   },
   actions: {

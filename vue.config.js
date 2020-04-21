@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+
 module.exports = {
 	publicPath: './',
     devServer: {
@@ -11,6 +13,6 @@ module.exports = {
                 }
             }
         },
-    } 
+    },
 	       
 }

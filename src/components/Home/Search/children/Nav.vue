@@ -26,8 +26,8 @@ export default {
     async getSearch(){
       const {data:data} = await this.$http.get('/search/default');
       this.defaultSearch = data.data.showKeyword;
-      // const data1 = await this.$http.get("/search?keywords=朴树&type=1000&limit=15");
-      // console.log(data1);
+      const data1 = await this.$http.get("/album?id=35444067");
+      console.log(data1);
     },
     back(){
       this.$router.go(-1);

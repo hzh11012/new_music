@@ -7,19 +7,19 @@
     </div>
     <div class="list">
       <div class="child">
-        <div>
+        <div @click="goMusiclist1()">
           <van-image fit="cover" radius="10px" :src="this.$store.state.recommend[0].picUrl" />
           <div class="listtitle">{{this.$store.state.recommend[0].name}}</div>
         </div>
       </div>
       <div class="child">
-        <div>
+        <div @click="goMusiclist2(num)">
           <van-image fit="cover" radius="10px" :src="this.$store.state.recommend[num].picUrl" />
           <div class="listtitle">{{this.$store.state.recommend[num].name}}</div>
         </div>
       </div>
       <div class="child">
-        <div>
+        <div @click="goMusiclist3(num1)">
           <van-image fit="cover" radius="10px" :src="this.$store.state.recommend[num1].picUrl" />
           <div class="listtitle">{{this.$store.state.recommend[num1].name}}</div>
         </div>
@@ -29,9 +29,54 @@
 </template>
 
 <script>
+import { getImageMeanColor } from "../../../../assets/js/getImageMeanColor.js";
 export default {
   data() {
     return {};
+  },
+  methods: {
+    goMusiclist1() {
+      const url = this.$store.state.recommend[0].picUrl;
+      getImageMeanColor({
+        imageUrl: url,
+        clipHeight: "100%",
+        skewPosition: "top",
+        minification: 10,
+        cb: function(rgba) {
+          this.$store.commit("backColor", rgba);
+        }.bind(this)
+      });
+      this.$store.commit("musicListId", this.$store.state.recommend[0].id);
+      this.$router.push("/musiclist");
+    },
+    goMusiclist2(num) {
+      const url = this.$store.state.recommend[num].picUrl;
+      getImageMeanColor({
+        imageUrl: url,
+        clipHeight: "100%",
+        skewPosition: "top",
+        minification: 10,
+        cb: function(rgba) {
+          this.$store.commit("backColor", rgba);
+        }.bind(this)
+      });
+      this.$store.commit("musicListId", this.$store.state.recommend[num].id);
+      this.$router.push("/musiclist");
+    },
+    goMusiclist3(num1) {
+      const url = this.$store.state.recommend[num1].picUrl;
+      getImageMeanColor({
+        imageUrl: url,
+        clipHeight: "100%",
+        skewPosition: "top",
+        minification: 10,
+        cb: function(rgba) {
+          this.$store.commit("backColor", rgba);
+        }.bind(this)
+      });
+      this.$store.commit("musicListId", this.$store.state.recommend[num1].id);
+      this.$router.push("/musiclist");
+    }
   },
   props: {
     num: {

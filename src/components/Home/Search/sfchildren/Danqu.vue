@@ -16,12 +16,10 @@
             <div class="desc van-ellipsis">{{item.alias[0]}}</div>
           </div>
           <div class="score">
-            <div>
-              <van-icon v-if="item.mvid !== 0" name="video-o" />
-            </div>
-            <div>
-              <van-icon class="icon2" name="ellipsis" />
-            </div>
+            <van-icon v-if="item.mv !== 0" name="video-o" />
+          </div>
+          <div class="score">
+            <van-icon name="ellipsis" />
           </div>
         </div>
       </van-list>
@@ -42,7 +40,6 @@ export default {
   },
   methods: {
     onLoad() {
-      console.log(1);
       setTimeout(async () => {
         await this.$http
           .get(
@@ -85,16 +82,20 @@ export default {
   background: #e0e0e0;
 }
 .score {
-  width: 60px;
-}
-.score div {
   width: 30px;
-  display: inline-block;
+  height: 44px;
+  position: relative;
+  color: #a3a3a3;
+}
+.score .van-icon {
+  position: absolute;
+  transform: translateY(-50%) translateX(-50%);
+  top: 50%;
+  left: 50%;
   font-size: 20px;
-  color: rgb(204, 204, 204);
 }
 .icon2 {
-    transform: rotate(90deg);
+  transform: rotate(90deg);
 }
 .content {
   flex: 1;
@@ -114,8 +115,5 @@ export default {
 }
 .zuozhe {
   color: #527fb0;
-}
-.zhuanji {
-  color: #a2a2a2;
 }
 </style>
