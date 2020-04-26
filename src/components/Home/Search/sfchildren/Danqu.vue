@@ -2,7 +2,12 @@
   <div>
     <div class="main">
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-        <div class="lists" v-for="(item, index) in this.songs" :key="index">
+        <div
+          class="lists"
+          @click="fullScreen(item)"
+          v-for="(item, index) in this.songs"
+          :key="index"
+        >
           <div class="content van-ellipsis">
             <div class="name van-ellipsis">
               <span>{{item.name}}</span>
@@ -35,7 +40,8 @@ export default {
       page: 0,
       loading: false,
       finished: false,
-      songCount: ""
+      songCount: "",
+      audioList: []
     };
   },
   methods: {
@@ -64,6 +70,14 @@ export default {
             this.page += 15;
           });
       }, 1000);
+    },
+    fullScreen(item) {
+      this.$http("/song/detail?ids=" + item.id).then(res => {
+        this.$store.commit("audio_ing_song", res.data.songs);
+        this.$store.dispatch("startPlayAll", res.data.songs);
+        this.$store.commit("startMusic", item.id);
+        this.$store.commit("isFull", true);
+      });
     }
   }
 };

@@ -14,6 +14,7 @@ import SearchFinshed from '../components/Home/Search/SearchFinshed'
 import Test from "../components/Home/Test"
 import MusicList from "../components/Home/MusicList/MusicList"
 import ZhuanJi from "../components/Home/Zhuanji/ZhuanJi"
+import RiTui from "../components/Home/Find/children/Ichildren/Ritui"
 Vue.use(VueRouter)
 
 const routes = [
@@ -34,7 +35,8 @@ const routes = [
   { path: '/searchfinshed', name: 'searchfinshed', component: SearchFinshed },
   { path: '/test', name: 'test', component: Test },
   { path: '/musiclist', name: 'musiclist', component: MusicList },
-  { path: '/zhuanji', name: 'zhuanji', component: ZhuanJi }
+  { path: '/zhuanji', name: 'zhuanji', component: ZhuanJi },
+  { path: '/ritui', name: 'ritui', component: RiTui }
 ]
 
 const router = new VueRouter({

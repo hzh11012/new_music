@@ -11,7 +11,7 @@ import {
   Button, NavBar, Icon, Field, Toast, Form, CountDown,
   PasswordInput, NumberKeyboard, Tab, Tabs, Popup, Sticky, Image, Card,
   Tag, Swipe, SwipeItem, Grid, GridItem, Skeleton, PullRefresh, Search, 
-  Cell, CellGroup, Loading, List 
+  Cell, CellGroup, Loading, List, Overlay, ActionSheet 
 } from 'vant'
 Vue.use(Button);
 Vue.use(NavBar);
@@ -39,7 +39,8 @@ Vue.use(Cell);
 Vue.use(CellGroup);
 Vue.use(Loading);
 Vue.use(List);
-
+Vue.use(Overlay);
+Vue.use(ActionSheet);
 
 //配置请求的根路径
 import axios from 'axios'

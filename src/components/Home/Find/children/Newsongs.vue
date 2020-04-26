@@ -3,7 +3,7 @@
     <div class="title">新歌</div>
     <lazy-component>
       <van-grid :column-num="1" :border="false" :center="false">
-        <van-grid-item v-for="(item,index) in this.$store.state.newsongs" :key="index">
+        <van-grid-item @click="fullScreen(item)" v-for="(item,index) in this.$store.state.newsongs" :key="index">
           <div class="items">
             <div class="img" :style="{'background-image':'url(' + (item.picUrl) + ')'}"></div>
             <div class="listinfo">
@@ -26,7 +26,23 @@ import { Lazyload } from "vant";
 Vue.use(Lazyload, {
   lazyComponent: true
 });
-export default {};
+export default {
+  data() {
+    return {
+      audioList: []
+    };
+  },
+  methods: {
+    fullScreen(item) {
+      this.$http("/song/detail?ids=" + item.id).then(res => {
+        this.$store.commit("audio_ing_song", res.data.songs);
+        this.$store.dispatch("startPlayAll", res.data.songs);
+        this.$store.commit("startMusic", item.id);
+        this.$store.commit("isFull", true);
+      });
+    }
+  }
+};
 </script>
 
 <style scoped>

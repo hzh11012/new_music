@@ -2,7 +2,7 @@
   <div class="main">
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
       <van-sticky :offset-top="44">
-        <div v-if="loading1 == true" class="header">
+        <div v-if="loading1 == true" class="header"  @click="startPlayall">
           <div class="icon">
             <van-icon size="20px" name="play-circle-o" />
           </div>
@@ -17,7 +17,7 @@
           </div>
         </div>
       </van-sticky>
-      <div class="lists" v-for="(item, index) in this.tracks" :key="index">
+      <div @click="fullScreen(item,index)" class="lists" v-for="(item, index) in this.tracks" :key="index">
         <div class="index">
           <div>{{index + 1}}</div>
         </div>
@@ -54,7 +54,8 @@ export default {
       finished: false,
       trackCount: "",
       loading1: false,
-      subscribedCount: ""
+      subscribedCount: "",
+      allSongList: []
     };
   },
   methods: {
@@ -63,12 +64,16 @@ export default {
         await this.$http
           .get("/playlist/detail?id=" + this.$store.state.musiclistid)
           .then(res => {
-            this.trackCount = res.data.playlist.trackCount;
-            this.subscribedCount = res.data.playlist.subscribedCount;
-            var date = res.data.playlist.tracks.slice(this.page, this.number);
-            date.forEach(element => {
-              this.tracks.push(element);
-            });
+            console.log(res);
+            if (res.data.code === 200) {
+              this.allSongList = res.data.playlist.tracks;
+              this.trackCount = res.data.playlist.trackCount;
+              this.subscribedCount = res.data.playlist.subscribedCount;
+              var date = res.data.playlist.tracks.slice(this.page, this.number);
+              date.forEach(element => {
+                this.tracks.push(element);
+              });
+            }
           });
         this.loading = false;
         this.loading1 = true;
@@ -80,6 +85,22 @@ export default {
         this.page = this.page + 15;
         this.number = this.number + 15;
       }, 1000);
+    },
+    startPlayall() {
+      console.log(this.allSongList);
+      this.$store.dispatch("startPlayAll", this.allSongList);
+      this.$store.commit("audio_ing_song",  [this.allSongList[0]]);
+      this.$store.commit("startMusic", this.allSongList[0].id);
+      this.$store.commit("isFull", true);
+    },
+    fullScreen(item,index) {
+      this.$store.commit('returnIndex', index);
+      this.$http("/song/detail?ids=" + item.id).then(res => {
+        this.$store.dispatch("startPlayAll", this.allSongList);
+        this.$store.commit("audio_ing_song", res.data.songs);
+        this.$store.commit("startMusic", item.id);
+        this.$store.commit("isFull", true);
+      });
     }
   }
 };

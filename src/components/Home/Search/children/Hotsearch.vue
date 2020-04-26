@@ -3,7 +3,7 @@
     <div class="title">热搜榜</div>
     <div>
       <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
-        <div class="lists" v-for="(item, index) in hotSearch" :key="index">
+        <div class="lists" @click="search(item.searchWord)" v-for="(item, index) in hotSearch" :key="index">
           <div class="index">
             <div :class="index < 3 ? 'first_third_index':'last_idnex'">{{index + 1}}</div>
           </div>
@@ -62,8 +62,9 @@ export default {
       const data = await this.$http.get("/search/hot/detail");
       this.hotlength = data.data.data.length;
       this.hotSearch = data.data.data.slice(this.page, this.number);
-
-      
+    },search(words){
+      this.$store.commit('searchName', words);
+      this.$router.push('/searchfinshed');
     }
   }
 };

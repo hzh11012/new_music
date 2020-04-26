@@ -2,7 +2,7 @@
   <div class="main">
     <van-list v-model="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
       <van-sticky :offset-top="44">
-        <div v-if="loading1 == true" class="header">
+        <div v-if="loading1 == true" class="header"  @click="startPlayall">
           <div class="icon">
             <van-icon size="20px" name="play-circle-o" />
           </div>
@@ -17,7 +17,7 @@
           </div>
         </div>
       </van-sticky>
-      <div class="lists" v-for="(item, index) in this.songs" :key="index">
+      <div @click="fullScreen(item,index)" class="lists" v-for="(item, index) in this.songs" :key="index">
         <div class="index">
           <div>{{index + 1}}</div>
         </div>
@@ -54,7 +54,8 @@ export default {
       loading: false,
       finished: false,
       songsCount: "",
-      loading1: false
+      loading1: false,
+      allSongList: []
     };
   },
   methods: {
@@ -63,6 +64,7 @@ export default {
         await this.$http
           .get("/album?id=" + this.$store.state.musiclistid)
           .then(res => {
+            this.allSongList = res.data.songs;
             this.songsCount = res.data.songs.length;
             var date = res.data.songs.slice(this.page, this.number);
             date.forEach(element => {
@@ -79,6 +81,22 @@ export default {
         this.page = this.page + 15;
         this.number = this.number + 15;
       }, 1000);
+    },
+    startPlayall() {
+      console.log(this.allSongList[0].id);
+      this.$store.dispatch("startPlayAll", this.allSongList);
+      this.$store.commit("audio_ing_song",  [this.allSongList[0]]);
+      this.$store.commit("startMusic", this.allSongList[0].id);
+      this.$store.commit("isFull", true);
+    },
+    fullScreen(item,index) {
+      this.$store.commit('returnIndex', index);
+      this.$http("/song/detail?ids=" + item.id).then(res => {
+        this.$store.dispatch("startPlayAll", this.allSongList);
+        this.$store.commit("audio_ing_song", res.data.songs);
+        this.$store.commit("startMusic", item.id);
+        this.$store.commit("isFull", true);
+      });
     }
   }
 };

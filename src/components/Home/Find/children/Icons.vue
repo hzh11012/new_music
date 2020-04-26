@@ -1,8 +1,10 @@
 <template>
   <div>
     <van-grid :column-num="5" :border="false">
-      <van-grid-item v-for="(item,index) in gridItem" :key="index">
-        <div class="icons"><van-icon :name="item.icon" size="20px"/></div>
+      <van-grid-item @click="go(index)" v-for="(item,index) in gridItem" :key="index">
+        <div class="icons">
+          <van-icon :name="item.icon" size="20px" />
+        </div>
         <span class="font">{{ item.text }}</span>
       </van-grid-item>
     </van-grid>
@@ -21,6 +23,13 @@ export default {
         { index: 4, icon: "chat-o", text: "直播" }
       ]
     };
+  },
+  methods: {
+    go(index) {
+      if (index === 0) {
+        this.$router.push("/ritui");
+      }
+    }
   }
 };
 </script>
@@ -30,18 +39,18 @@ export default {
   font-size: 12px;
   padding-top: 6px;
 }
-.icons{
-    height: 45px;
-    width: 45px;
-    background: red;
-    border-radius: 100%;
-    position: relative;
+.icons {
+  height: 45px;
+  width: 45px;
+  background: red;
+  border-radius: 100%;
+  position: relative;
 }
 .van-icon {
-    position: absolute;
-    transform: translateX(-50%) translateY(-50%);
-    top:50%;
-    left: 50%;
-    color: white;
+  position: absolute;
+  transform: translateX(-50%) translateY(-50%);
+  top: 50%;
+  left: 50%;
+  color: white;
 }
 </style>
